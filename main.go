@@ -50,10 +50,7 @@ func (o Onion) Run(ctx context.Context) error {
 	for i, step := range o {
 		err = step.Forward(ctx)
 		if err != nil {
-			err = o.Unwind(ctx, i)
-			if err != nil {
-				panic(err)
-			}
+			return o.Unwind(ctx, i)
 		}
 
 	}
